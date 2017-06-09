@@ -1161,6 +1161,7 @@ def run_phpinput():
 	else:
 		inputurl = ahurl
 
+	inputurl = checkHttp(inputurl)
 	inputurl = cutURLToLastEqual(inputurl)
 	resp = send_phpinput_cmd("echo Bodom", inputurl)
 	got = SubstrFind(resp,"AbracadabrA **")
