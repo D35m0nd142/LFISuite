@@ -34,5 +34,5 @@ LFI Suite is a totally <b>automatic</b> tool able to scan and exploit Local File
 
 I am not responsible for any kind of illegal acts you cause. This is meant to be used for ethical purposes by penetration testers. If you plan to copy, redistribute please give credits to the original author.
 
-Video: Be patient..it will be available in a few days
+Video: Be patient..it will be available in a few days <br>
 Follow me: https://twitter.com/d35m0nd142
