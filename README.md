@@ -4,7 +4,7 @@
 
 <h3> What is LFI Suite? </h3>
 
-LFI Suite is a totally <b>automatic</b> tool able to scan and exploit Local File Inclusion Vulnerabilities using many different methods of attack, listed in the section `Features`.
+LFI Suite is a totally <b>automatic</b> tool able to scan and exploit Local File Inclusion vulnerabilities using many different methods of attack, listed in the section `Features`.
 
 <h3> Features </h3>
 
