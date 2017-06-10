@@ -21,7 +21,7 @@ LFI Suite is a totally <b>automatic</b> tool able to scan and exploit Local File
   - data://
   - expect://
 
-* It provides a ninth modality called <b>Auto-Hack</b>, which scans and exploits the target automatically by trying all the attacks one after the other without you having to do anything (except for providing, at the beginning, a list of paths to scan, which if you don't have you can find in this project directory in two versions, small and huge). 
+* It provides a ninth modality, called <b>Auto-Hack</b>, which scans and exploits the target automatically by trying all the attacks one after the other without you having to do anything (except for providing, at the beginning, a list of paths to scan, which if you don't have you can find in this project directory in two versions, small and huge). 
 * Tor proxy support
 * Reverse Shell for Windows, Linux and OS X
 
