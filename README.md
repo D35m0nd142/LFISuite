@@ -32,7 +32,7 @@ LFI Suite is a totally <b>automatic</b> tool able to scan and exploit Local File
 * Python modules to install: termcolor, requests
 * socks.py 
 
-> I recommend you to install <b>pip</b> on your operating system because if you have it installed, when you run the software all the missing dependencies will be automatically solved.
+> I recommend you to install <b>pip</b> on your operating system because if you have it installed, when you run the software all the missing modules will be automatically solved and the file socks.py downloaded.
 
 <h3> Disclaimer </h3>
 
