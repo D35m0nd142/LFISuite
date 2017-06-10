@@ -25,6 +25,11 @@ LFI Suite is a totally <b>automatic</b> tool able to scan and exploit Local File
 * Tor proxy support
 * Reverse Shell for Windows, Linux and OS X
 
+<h3> How to use it? </h3>
+
+Usage is extremely simple and LFI Suite has an easy-to-use user interface; just run it and let it lead you.
+###### Reverse Shell
+When you got a LFI shell by using one of the available attacks, you can easily obtain a reverse shell by entering the command <b>"reverseshell"</b> (obviously you have to put your system listening for connection, for instance using <br>"nc -lvp listening_port"</br>).
 
 <h3> Dependencies </h3>
 
