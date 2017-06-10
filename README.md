@@ -39,6 +39,11 @@ When you got a LFI shell by using one of the available attacks, you can easily o
 
 > I recommend you to install <b>pip</b> on your operating system because if you have it installed, when you run the software all the missing modules will be automatically solved and the file socks.py downloaded.
 
+<h3> Collaboration </h3>
+
+LFI Suite already contains a lot of features but, as you probably know, there are plenty of other possible attacks still to implement.
+If you are a Python programmer and you wants to join this project in order to improve it and extend it, please contact me at <<b>d35m0nd142@gmail.com</b>>.
+
 <h3> Disclaimer </h3>
 
 I am not responsible for any kind of illegal acts you cause. This is meant to be used for ethical purposes by penetration testers. If you plan to copy, redistribute please give credits to the original author.
