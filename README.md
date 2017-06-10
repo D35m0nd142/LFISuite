@@ -42,7 +42,7 @@ When you got a LFI shell by using one of the available attacks, you can easily o
 <h3> Collaboration </h3>
 
 LFI Suite already contains a lot of features but, as you probably know, there are plenty of other possible attacks still to implement.
-If you are a Python programmer and you wants to join this project in order to improve it and extend it, please contact me at <<b>d35m0nd142@gmail.com</b>>.
+If you are a Python programmer/Penetration tester and you want to join this project in order to improve it and extend it, please contact me at <<b>d35m0nd142@gmail.com</b>>.
 
 <h3> Disclaimer </h3>
 
