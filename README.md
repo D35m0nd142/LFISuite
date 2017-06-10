@@ -6,6 +6,8 @@
 
 LFI Suite is a totally <b>automatic</b> tool able to scan and exploit Local File Inclusion vulnerabilities using many different methods of attack, listed in the section `Features`.
 
+* * * 
+
 <h3> Features </h3>
 
 * Works with Windows, Linux and OS X
