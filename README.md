@@ -42,7 +42,7 @@ When you got a LFI shell by using one of the available attacks, you can easily o
 * Python modules to install: termcolor, requests
 * socks.py 
 
-> I recommend you to install <b>pip</b> on your operating system because if you have it installed, when you run the software all the missing modules will be automatically solved and the file socks.py downloaded.
+> When you run the script it will check if you have <b>pip</b> installed and, in case you don't, it will install it <b>automatically</b>, then using pip it will install also the missing modules and download the necessary file <b>socks.py</b>.<br>I tried it on different operating systems (Debian,Ubuntu,Fedora,Windows 10,OS X) and it worked great, but if something strange happens to you and the automatic installation of pip and other modules fails, install pip/modules manually and re-run the script.
 
 <h3> Collaboration </h3>
 
