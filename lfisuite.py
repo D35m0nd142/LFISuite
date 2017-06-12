@@ -10,10 +10,25 @@
 import os
 import re
 import sys
+import urllib
+import subprocess
 
 try:
 	import wget
 except:
+	try:
+		subprocess.call(["pip"]) # verify if pip is already installed
+	except OSError as e:
+		print "[!] pip is not currently installed..downloading get-pip.py.."
+    	getpip_url = "https://bootstrap.pypa.io/get-pip.py"
+    	web_file = urllib.urlopen(getpip_url)
+    	local_file = open('get-pip.py', 'w')
+    	local_file.write(web_file.read())
+    	web_file.close()
+    	local_file.close()
+    	os.system("python get-pip.py")
+
+	os.system("pip install --upgrade pip") # let's upgrade pip
 	os.system("pip install wget")
 finally:
 	import wget
@@ -42,7 +57,6 @@ finally:
 	import socks
 
 import threading
-import subprocess
 from random import randint
 
 try:
