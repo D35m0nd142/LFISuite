@@ -13,25 +13,60 @@ import sys
 import urllib
 import subprocess
 
+def pip_install_module(module_name):
+	pip_path = "pip"
+	DEVNULL = open(os.devnull,'wb')
+	new_installation = True
+
+	try:
+		subprocess.call(["pip"], stdout=DEVNULL) # verify if pip is already installed
+	except OSError as e:
+		if(sys.platform[:3] == "win"):
+			python_dir = sys.executable
+			split = python_dir.split("\\")
+			pip_path = ""
+			for i in range(0,len(split)-1):
+				pip_path = "%s/%s" %(pip_path,split[i])
+
+			pip_path = "%s/Scripts/pip" %pip_path[1:]
+			try:
+				subprocess.call([pip_path],stdout=DEVNULL)
+				new_installation = False
+				print "[+] Found Windows pip executable at '%s'" %pip_path
+			except:
+				pass
+
+		if(new_installation):
+			print "[!] pip is not currently installed..downloading get-pip.py.."
+	    	getpip_url = "https://bootstrap.pypa.io/get-pip.py"
+	    	web_file = urllib.urlopen(getpip_url)
+	    	local_file = open('get-pip.py', 'w')
+	    	local_file.write(web_file.read())
+	    	web_file.close()
+	    	local_file.close()
+	    	os.system("python get-pip.py")
+
+	    	try:
+	    		subprocess.call(["pip"],stdout=DEVNULL)
+	    	except:
+	    		if(sys.platform[:3] == "win"):
+		    		python_dir = sys.executable # "C:\\Python27\\python.exe"
+		    		split = python_dir.split("\\")
+		    		pip_path = ""
+		    		for i in range(0,len(split)-1): # let's avoid python.exe
+		    			pip_path = "%s/%s" %(pip_path,split[i])
+
+		    		pip_path = "%s/Scripts/pip" %pip_path[1:]
+
+	if(new_installation):
+		os.system("%s install --upgrade pip" %pip_path)
+	print "\n[*] Installing module '%s'" %module_name
+	os.system("%s install %s" %(pip_path,module_name))
+
 try:
 	import wget
 except:
-	try:
-		subprocess.call(["pip"]) # verify if pip is already installed
-	except OSError as e:
-		print "[!] pip is not currently installed..downloading get-pip.py.."
-    	getpip_url = "https://bootstrap.pypa.io/get-pip.py"
-    	web_file = urllib.urlopen(getpip_url)
-    	local_file = open('get-pip.py', 'w')
-    	local_file.write(web_file.read())
-    	web_file.close()
-    	local_file.close()
-    	os.system("python get-pip.py")
-
-	os.system("pip install --upgrade pip") # let's upgrade pip
-	os.system("pip install wget")
-finally:
-	import wget
+	pip_install_module("wget")
 
 import time
 import socket
@@ -43,7 +78,7 @@ import shutil
 try:
 	import requests
 except:
-	os.system("pip install requests")
+	pip_install_module("requests")
 finally:
 	import requests
 
@@ -52,7 +87,7 @@ try:
 except:
 	socks_filename = wget.download("https://raw.githubusercontent.com/D35m0nd142/LFISuite/master/socks.py")
 	if(sys.platform[:3] == "win"): # in case you are using Windows you may need to install an additional module
-		os.system("pip install win_inet_pton")
+		pip_install_module("win_inet_pton")
 finally:
 	import socks
 
@@ -62,7 +97,7 @@ from random import randint
 try:
 	from termcolor import colored
 except:
-	os.system("pip install termcolor")
+	pip_install_module("termcolor")
 finally:
 	from termcolor import colored
 
