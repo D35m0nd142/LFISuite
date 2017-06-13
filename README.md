@@ -46,7 +46,7 @@ When you got a LFI shell by using one of the available attacks, you can easily o
 * socks.py 
 
 > When you run the script, in case you are missing some modules, it will check if you have <b>pip</b> installed and, in case you don't, it will install it <b>automatically</b>, then using pip it will install also the missing modules and download the necessary file <b>socks.py</b>.<br>I tried it on different operating systems (Debian,Ubuntu,Fedora,Windows 10,OS X) and it worked great, but if something strange happens to you and the automatic installation of pip and other modules fails, please install missing modules manually and re-run the script.
-<br>![#f03c15](https://placehold.it/15/f03c15/000000?text=+) <b>IMPORTANT: In order to allow the script to install missing modules (and in case pip) automatically, you MUST run the script as root (or, at least, with the sufficient permissions) the first time.</b>
+<br>![#f03c15](https://placehold.it/15/f03c15/000000?text=+) <b>IMPORTANT: In order to allow the script to install missing modules (and in case pip) automatically, you MUST run the script as root (or, at least, with sufficient permissions) the first time.</b>
 
 <h3> Collaboration </h3>
 
