@@ -185,9 +185,11 @@ def banner():
 	print "| Author: D35m0nd142, <d35m0nd142@gmail.com> https://twitter.com/d35m0nd142 |"
 	print "\*-------------------------------------------------------------------------*/\n"
 
+
 def check_for_update():
 	lfisuite_github_url = "https://raw.githubusercontent.com/D35m0nd142/LFISuite/master/lfisuite.py"
 	keyword = "LFS_VERSION = '"
+	updated = False
 	print "\n[*] Checking for LFISuite updates.."
 	time.sleep(1)
 
@@ -204,6 +206,7 @@ def check_for_update():
 
 		fcurrversion = float(currversion)
 		if(fcurrversion > float(LFS_VERSION)):
+			updated = True
 			print "\n[+] New LFISuite version found. Updating.."
 			download(lfisuite_github_url,sys.argv[0])
 			print colored("[+] LFISuite updated to version %s" %currversion,"red")
@@ -212,6 +215,9 @@ def check_for_update():
 			print "\n[-] No updates available."
 	except:
 		print "\n[-] Problem while updating."
+
+	if updated:
+		sys.exit(0)
 
 # this is needed by access_log and passthru
 class NoURLEncodingSession(requests.Session):
