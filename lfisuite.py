@@ -1797,10 +1797,11 @@ while(validChoice is False):
 			tor_port = raw_input("[*] Tor Port [default=9150] -> ")
 			if(len(tor_addr) == 0):
 				tor_addr = "127.0.0.1"
-			if(len(tor_port) == 0 or int(tor_port) > 65535 or int(tor_port) < 1):
+			if(tor_port.isdigit() is False or int(tor_port) > 65535 or int(tor_port) < 1):
+				print "[!] Invalid port! Using 9150."
 				tor_port = 9150
 
-			socks.setdefaultproxy(socks.PROXY_TYPE_SOCKS5, tor_addr, tor_port)
+			socks.setdefaultproxy(socks.PROXY_TYPE_SOCKS5, tor_addr, int(tor_port))
 			socket.socket = socks.socksocket
 			print colored("[+] TOR proxy active on socks5://%s:%s" %(tor_addr,tor_port),"red")
 			time.sleep(0.5)
