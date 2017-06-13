@@ -212,7 +212,7 @@ def check_for_update():
 			print colored("\n[+] LFISuite updated to version %s" %currversion,"red")
 			os.system("%s %s" %(sys.executable,sys.argv[0]))
 		else:
-			print "[-] No updates available."
+			print "[-] No updates available.\n"
 	except:
 		print "\n[-] Problem while updating."
 
