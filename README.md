@@ -30,6 +30,11 @@ LFI Suite is a totally <b>automatic</b> tool able to scan and exploit Local File
 * Tor proxy support
 * Reverse Shell for Windows, Linux and OS X
 
+<h3> Extra features </h3>
+
+* Automatic Configuration 
+* Automatic Update
+
 <h3> How to use it? </h3>
 
 Usage is extremely simple and LFI Suite has an easy-to-use user interface; just run it and let it lead you.
@@ -42,7 +47,7 @@ When you got a LFI shell by using one of the available attacks, you can easily o
 * Python modules to install: termcolor, requests
 * socks.py 
 
-> When you run the script it will check if you have <b>pip</b> installed and, in case you don't, it will install it <b>automatically</b>, then using pip it will install also the missing modules and download the necessary file <b>socks.py</b>.<br>I tried it on different operating systems (Debian,Ubuntu,Fedora,Windows 10,OS X) and it worked great, but if something strange happens to you and the automatic installation of pip and other modules fails, please install missing modules manually and re-run the script.
+> When you run the script, in case you are missing some modules, it will check if you have <b>pip</b> installed and, in case you don't, it will install it <b>automatically</b>, then using pip it will install also the missing modules and download the necessary file <b>socks.py</b>.<br>I tried it on different operating systems (Debian,Ubuntu,Fedora,Windows 10,OS X) and it worked great, but if something strange happens to you and the automatic installation of pip and other modules fails, please install missing modules manually and re-run the script.
 
 <h3> Collaboration </h3>
 
