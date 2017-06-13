@@ -16,6 +16,8 @@ LFI Suite is a totally <b>automatic</b> tool able to scan and exploit Local File
 <h3> Features </h3>
 
 * Works with Windows, Linux and OS X
+* Automatic Configuration 
+* Automatic Update
 * Provides 8 different Local File Inclusion attack modalities:
   - /proc/self/environ
   - php://filter
@@ -30,10 +32,6 @@ LFI Suite is a totally <b>automatic</b> tool able to scan and exploit Local File
 * Tor proxy support
 * Reverse Shell for Windows, Linux and OS X
 
-<h3> Extra features </h3>
-
-* Automatic Configuration 
-* Automatic Update
 
 <h3> How to use it? </h3>
 
