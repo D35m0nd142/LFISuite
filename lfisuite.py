@@ -13,60 +13,28 @@ import sys
 import urllib
 import subprocess
 
-def pip_install_module(module_name):
-	pip_path = "pip"
-	DEVNULL = open(os.devnull,'wb')
-	new_installation = True
+def download(file_url,local_filename):
+	web_file = urllib.urlopen(file_url)
+	local_file = open(local_filename, 'w')
+	local_file.write(web_file.read())
+	web_file.close()
+	local_file.close()
 
+def solve_dependencies(module_name,download_url=None):
 	try:
-		subprocess.call(["pip"], stdout=DEVNULL) # verify if pip is already installed
-	except OSError as e:
-		if(sys.platform[:3] == "win"):
-			python_dir = sys.executable
-			split = python_dir.split("\\")
-			pip_path = ""
-			for i in range(0,len(split)-1):
-				pip_path = "%s/%s" %(pip_path,split[i])
+		from pipper import pip_install_module
+	except:
+		print "[!] pipper not found in the current directory.. Downloading pipper.."
+		download("https://raw.githubusercontent.com/D35m0nd142/LFISuite/master/pipper.py","pipper.py")
+		from pipper import pip_install_module
 
-			pip_path = "%s/Scripts/pip" %pip_path[1:]
-			try:
-				subprocess.call([pip_path],stdout=DEVNULL)
-				new_installation = False
-				print "[+] Found Windows pip executable at '%s'" %pip_path
-			except:
-				pass
-
-		if(new_installation):
-			print "[!] pip is not currently installed..downloading get-pip.py.."
-	    	getpip_url = "https://bootstrap.pypa.io/get-pip.py"
-	    	web_file = urllib.urlopen(getpip_url)
-	    	local_file = open('get-pip.py', 'w')
-	    	local_file.write(web_file.read())
-	    	web_file.close()
-	    	local_file.close()
-	    	os.system("python get-pip.py")
-
-	    	try:
-	    		subprocess.call(["pip"],stdout=DEVNULL)
-	    	except:
-	    		if(sys.platform[:3] == "win"):
-		    		python_dir = sys.executable # "C:\\Python27\\python.exe"
-		    		split = python_dir.split("\\")
-		    		pip_path = ""
-		    		for i in range(0,len(split)-1): # let's avoid python.exe
-		    			pip_path = "%s/%s" %(pip_path,split[i])
-
-		    		pip_path = "%s/Scripts/pip" %pip_path[1:]
-
-	if(new_installation):
-		os.system("%s install --upgrade pip" %pip_path)
-	print "\n[*] Installing module '%s'" %module_name
-	os.system("%s install %s" %(pip_path,module_name))
-
-try:
-	import wget
-except:
-	pip_install_module("wget")
+	if(download_url is not None):
+		print "\n[*] Downloading %s from '%s'.." %(module_name,download_url) 
+		download(download_url,module_name)
+		if(sys.platform[:3] == "win"): # in case you are using Windows you may need to install an additional module
+			pip_install_module("win_inet_pton")
+	else:
+		pip_install_module(module_name)
 
 import time
 import socket
@@ -78,17 +46,13 @@ import shutil
 try:
 	import requests
 except:
-	pip_install_module("requests")
-finally:
+	solve_dependencies("requests")
 	import requests
 
 try:
 	import socks
 except:
-	socks_filename = wget.download("https://raw.githubusercontent.com/D35m0nd142/LFISuite/master/socks.py")
-	if(sys.platform[:3] == "win"): # in case you are using Windows you may need to install an additional module
-		pip_install_module("win_inet_pton")
-finally:
+	solve_dependencies("socks.py","https://raw.githubusercontent.com/D35m0nd142/LFISuite/master/socks.py")
 	import socks
 
 import threading
@@ -97,11 +61,11 @@ from random import randint
 try:
 	from termcolor import colored
 except:
-	pip_install_module("termcolor")
-finally:
+	solve_dependencies("termcolor")
 	from termcolor import colored
 
 netcat_url = "https://github.com/D35m0nd142/LFISuite/raw/master/nc.exe"
+LFS_VERSION = '1.0' # DO NOT MODIFY THIS FOR ANY REASON!!
 
 #--------- Auto-Hack Global Variables ----------#
 ahactive     = False
@@ -220,6 +184,34 @@ def banner():
 	print "|                                                                           |"
 	print "| Author: D35m0nd142, <d35m0nd142@gmail.com> https://twitter.com/d35m0nd142 |"
 	print "\*-------------------------------------------------------------------------*/\n"
+
+def check_for_update():
+	lfisuite_github_url = "https://raw.githubusercontent.com/D35m0nd142/LFISuite/master/lfisuite.py"
+	keyword = "LFS_VERSION = '"
+	print "\n[*] Checking for LFISuite updates.."
+	time.sleep(1)
+
+	try:
+		lfisuite_content = requests.get(lfisuite_github_url,headers=gen_headers).text
+		currversion_index = SubstrFind(lfisuite_content,keyword)[0]
+		lfisuite_content = lfisuite_content[(currversion_index+len(keyword)):]
+
+		currversion = ""
+		for c in lfisuite_content:
+			if c == '\'':
+				break
+			currversion = "%s%s" %(currversion,c)
+
+		fcurrversion = float(currversion)
+		if(fcurrversion > float(LFS_VERSION)):
+			print "\n[+] New LFISuite version found. Updating.."
+			download(lfisuite_github_url,sys.argv[0])
+			print colored("[+] LFISuite updated to version %s" %currversion,"red")
+			os.system("%s %s" %(sys.executable,sys.argv[0]))
+		else:
+			print "\n[-] No updates available."
+	except:
+		print "\n[-] Problem while updating."
 
 # this is needed by access_log and passthru
 class NoURLEncodingSession(requests.Session):
@@ -1771,6 +1763,7 @@ def run_autoHack():
 #----------------------------------------------------------------------------------------------------------------------------------------#
 
 banner()
+check_for_update()
 time.sleep(0.5)
 choice = "4"
 validChoice = (choice == "1" or choice == "2" or choice == "x")
