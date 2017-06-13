@@ -207,12 +207,12 @@ def check_for_update():
 		fcurrversion = float(currversion)
 		if(fcurrversion > float(LFS_VERSION)):
 			updated = True
-			print "\n[+] New LFISuite version found. Updating.."
+			print "[+] New LFISuite version found. Updating.."
 			download(lfisuite_github_url,sys.argv[0])
-			print colored("[+] LFISuite updated to version %s" %currversion,"red")
+			print colored("\n[+] LFISuite updated to version %s" %currversion,"red")
 			os.system("%s %s" %(sys.executable,sys.argv[0]))
 		else:
-			print "\n[-] No updates available."
+			print "[-] No updates available."
 	except:
 		print "\n[-] Problem while updating."
 
