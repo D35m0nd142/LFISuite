@@ -146,6 +146,9 @@ proc/self/environ%00
 /etc/httpd/logs/error_log
 /var/www/logs/access_log
 /usr/local/apache/logs/access_log
+../../apache/logs/access.log
+../../../apache/logs/access.log
+../../../../apache/logs/access.log
 /var/log/apache/access_log
 /var/log/apache2/access_log
 /var/log/access_log
