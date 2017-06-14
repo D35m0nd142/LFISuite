@@ -2,7 +2,7 @@
 # Author: D35m0nd142, <d35m0nd142@gmail.com>
 # Twitter: @D35m0nd142
 # Python version: 2.7
-# Tutorial Video: https://www.youtube.com/?watch= In a few days I will make a video tutorial
+# Tutorial Video: https://www.youtube.com/watch?v=6sY1Skx8MBc
 # Github Repository: https://github.com/D35m0nd142/LFISuite
 
 #!/usr/bin/python
