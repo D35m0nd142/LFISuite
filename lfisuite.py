@@ -1613,7 +1613,14 @@ def scanner():
 	global ahcnf
 
 	print colored("\n.:: LFI Scanner ::.\n", "white")
-	fname = raw_input("[*] Enter the name of the file containing the paths to test -> ")
+        fname = False
+        while not fname:
+       	    fname = raw_input("[*] Enter the name of the file containing the paths to test -> ")
+            try:
+                os.stat(fname)
+            except OSError:
+                print colored("\n[!] Please enter a filename, cannot find %s" % (fname), "red")
+                fname = False
 
 	if(ahactive is False):
 		owebsite = raw_input("[*] Enter the URL to scan (ex: 'http://site/vuln.php?id=') -> ")
