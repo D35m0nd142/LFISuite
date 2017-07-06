@@ -65,7 +65,7 @@ except:
 	from termcolor import colored
 
 netcat_url = "https://github.com/D35m0nd142/LFISuite/raw/master/nc.exe"
-LFS_VERSION = '1.0' # DO NOT MODIFY THIS FOR ANY REASON!!
+LFS_VERSION = '1.1' # DO NOT MODIFY THIS FOR ANY REASON!!
 
 #--------- Auto-Hack Global Variables ----------#
 ahactive     = False
@@ -171,7 +171,7 @@ def banner():
    *###/..,/(*(###/   ** ,#### (/          /####/ * (###########  *#### (..###( #/. . *######/, *
    /########/.####**#*/( *###( #*        *#####. %(,./#######(, # (###( # *###/ #*   ., .*####/.(.
    /########/ ####,/(.   //,  (#*       ,*/((, ##/. .   ...  ,%#/ (/,  (#     /#/.      ,*  ,/./(.
-   .********, /*. .#/   .*##(/,.        ,/(###(*.     .,*****,.  ./##(/,. .,**,.           .*/(/,     v 1.0
+   .********, /*. .#/   .*##(/,.        ,/(###(*.     .,*****,.  ./##(/,. .,**,.           .*/(/,     v 1.1
              ./#(/*.
 
 	"""
@@ -320,6 +320,16 @@ def correctUrl(url): # ex: 'http://127.0.0.1/lfi.php?file=/etc/passwd' --> 'http
 	last = eq[len(eq)-1]
 
 	return url[:(last+1)]
+
+def checkFilename(filename): # useful in case of drag and drop
+	while(True):
+		if(filename[0] == '\''): 
+			filename = filename[1:]
+		if(filename[len(filename)-1] == '\''): 
+			filename = filename[:-1]
+		if(os.path.exists(filename)):
+			return filename
+		filename = raw_input("[!] Cannot find '%s'.\n[*] Enter a valid name of the file containing the paths to test -> " %filename) 
 
 def showInterestingPath(toPrint,stack):
 	print " %s: [%s]" %(toPrint,len(stack))
@@ -1614,6 +1624,7 @@ def scanner():
 
 	print colored("\n.:: LFI Scanner ::.\n", "white")
 	fname = raw_input("[*] Enter the name of the file containing the paths to test -> ")
+	fname = checkFilename(fname)
 
 	if(ahactive is False):
 		owebsite = raw_input("[*] Enter the URL to scan (ex: 'http://site/vuln.php?id=') -> ")
