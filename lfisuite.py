@@ -65,7 +65,7 @@ except:
 	from termcolor import colored
 
 netcat_url = "https://github.com/D35m0nd142/LFISuite/raw/master/nc.exe"
-LFS_VERSION = '1.1' # DO NOT MODIFY THIS FOR ANY REASON!!
+LFS_VERSION = '1.11' # DO NOT MODIFY THIS FOR ANY REASON!!
 
 #--------- Auto-Hack Global Variables ----------#
 ahactive     = False
@@ -797,7 +797,7 @@ def phpfilter_extract(content):
 			found.append(ftemp)
 
 	final = ""
-	if(len(found) > 0):
+	if(len(found) > 50):
 		maxim = 0
 		index = -1
 		for x in range(0,len(found)):
