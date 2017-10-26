@@ -210,7 +210,7 @@ def check_for_update():
 			print "[+] New LFISuite version found. Updating.."
 			download(lfisuite_github_url,sys.argv[0])
 			print colored("\n[+] LFISuite updated to version %s" %currversion,"red")
-			print "[i] See https://github.com/D35m0nd142/LFISuite/blob/master/CHANGELOG.md for details"
+			print "[i] Visit https://github.com/D35m0nd142/LFISuite/blob/master/CHANGELOG.md for details"
 			time.sleep(2)
 			os.system("%s %s" %(sys.executable,sys.argv[0]))
 		else:
