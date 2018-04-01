@@ -1,4 +1,4 @@
-![Version 1.11](https://img.shields.io/badge/Version-1.11-green.svg)
+![Version 1.13](https://img.shields.io/badge/Version-1.13-green.svg)
 ![Python 2.7.x](https://img.shields.io/badge/Python-2.7.x-yellow.svg)
 [![GPLv3 License](https://img.shields.io/badge/License-GPLv3-red.svg)](https://github.com/D35m0nd142/LFISuite/blob/master/COPYING.GPL)
 [![Twitter](https://img.shields.io/badge/Twitter-%40d35m0nd142-blue.svg)](https://www.twitter.com/d35m0nd142)
