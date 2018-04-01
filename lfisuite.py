@@ -65,7 +65,7 @@ except:
 	from termcolor import colored
 
 netcat_url = "https://github.com/D35m0nd142/LFISuite/raw/master/nc.exe"
-LFS_VERSION = '1.11' # DO NOT MODIFY THIS FOR ANY REASON!!
+LFS_VERSION = '1.12' # DO NOT MODIFY THIS FOR ANY REASON!!
 
 #--------- Auto-Hack Global Variables ----------#
 ahactive     = False
@@ -325,12 +325,13 @@ def correctUrl(url): # ex: 'http://127.0.0.1/lfi.php?file=/etc/passwd' --> 'http
 
 def checkFilename(filename): # useful in case of drag and drop
 	while(True):
-		if(filename[0] == '\''): 
-			filename = filename[1:]
-		if(filename[len(filename)-1] == '\''): 
-			filename = filename[:-1]
-		if(os.path.exists(filename)):
-			return filename
+		if(len(filename) > 0):
+			if(filename[0] == '\''): 
+				filename = filename[1:]
+			if(filename[len(filename)-1] == '\''): 
+				filename = filename[:-1]
+			if(os.path.exists(filename)):
+				return filename
 		filename = raw_input("[!] Cannot find '%s'.\n[*] Enter a valid name of the file containing the paths to test -> " %filename) 
 
 def showInterestingPath(toPrint,stack):
@@ -1625,7 +1626,9 @@ def scanner():
 	global ahcnf
 
 	print colored("\n.:: LFI Scanner ::.\n", "white")
-	fname = raw_input("[*] Enter the name of the file containing the paths to test -> ")
+	fname = raw_input("[*] Enter the name of the file containing the paths to test [default: 'pathtotest.txt'] -> ")
+	if(len(fname) == 0):
+		fname = "pathtotest.txt"
 	fname = checkFilename(fname)
 
 	if(ahactive is False):
