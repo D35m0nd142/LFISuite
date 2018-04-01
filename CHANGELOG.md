@@ -7,6 +7,6 @@ All notable changes to this project will be documented in this file.
 
 ## [1.13]  - 1 Apr 2018<br>
 ### Fixed
-- requests now are allowed even to any websites, even those with self-signed certificates
+- requests now are allowed to any websites, even those with self-signed certificates
 ### Added
 - set the default file containing paths to test to "pathtotest.txt" (used if the user leaves the input blank)
