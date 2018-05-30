@@ -1665,7 +1665,8 @@ def scanner():
 	        	and ("root:" in content or ("sbin" in content and "nologin" in content)
 	            or "DB_NAME" in content or "daemon:" in content or "DOCUMENT_ROOT=" in content
 	            or "PATH=" in content or "HTTP_USER_AGENT" in content or "HTTP_ACCEPT_ENCODING=" in content
-	            or "users:x" in content or ("GET /" in content and ("HTTP/1.1" in content or "HTTP/1.0" in content))
+	            or ("GET /" in content and ("HTTP/1.1" in content or "HTTP/1.0" in content)) or "users:x" in content
+		    or "user:x" in content or "root:x:" in content or "bin:x:" in content or "daemon:x:" in content
 	            or "apache_port=" in content or "cpanel/logs/access" in content or "allow_login_autocomplete" in content
 	            or "database_prefix=" in content or "emailusersbandwidth" in content or "adminuser=" in content
 	            or ("error]" in content and "[client" in content and "log" in website)
